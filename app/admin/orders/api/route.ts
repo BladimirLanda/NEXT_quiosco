@@ -53,6 +53,13 @@ el modelo order con orderProducts).
 -Incluye el array orderProducts (la relación que tenga 
 el modelo order con orderProducts).
 */
+
+/*
+export const dynamic = 'force-dynamic';
+Evita la prerenderización estática de vercel, es decir, 
+se renderizará en tiepo de ejecución ya que se conecto 
+a la DB y no en el build.
+*/
 export const dynamic = 'force-dynamic';
 
 export async function GET() {

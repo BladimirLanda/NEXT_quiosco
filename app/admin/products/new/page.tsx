@@ -22,13 +22,7 @@ El Client Component AddProductForm acepta children (que es lo que se le pasa des
 que debe ser un Server Component).
 Aquí, como CreateProductPage es Server Component, él compone AddProductForm con ProductForm 
 desde el server antes de enviar al cliente, por lo que se respetan las reglas ✅.
-
-export const dynamic = 'force-dynamic';
-Evita la prerenderización estática de vercel, es decir, 
-se renderizará en tiepo de ejecución ya que se conecto 
-a la DB y no en el build.
 */
-export const dynamic = 'force-dynamic';
 
 function CreateProductPage() {
     //---VIEW---//
