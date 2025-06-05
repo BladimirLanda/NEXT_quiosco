@@ -1,0 +1,92 @@
+//PRISMA SCHEMA
+
+//Configuración
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/*
+Modelos
+model Modelo {}
+
+-id Int @id @default(autoincrement())
+	Crea un campo id que es primary key (@id) y se autoincrementa
+-name String
+  Campo name tipo texto
+-products Product[]
+	Relación 1 a muchos → una categoría puede tener muchos productos
+-price Float
+  Campo price tipo número decimal
+-categoryId Int
+  Clave foránea (foreign key) que guarda el id de la categoría relacionada
+-category Category @relation(fields: [categoryId], references: [id])
+  Define la relación con el modelo Category usando categoryId que apunta a id de Category
+-date DateTime @default(now())
+  Campo date tipo Fecha con valor por default a la fecha de hoy
+-orderReadyAt DateTime?
+  Campo orderReadyAt de tipo Fecha que es opcional
+
+📦 npx prisma migrate dev
+Crea y ejecuta migraciones en la base de datos de desarrollo
+-Detecta cambios en el schema.prisma.
+-Genera un archivo de migración SQL en la carpeta /prisma/migrations.
+-Aplica esa migración en la base de datos.
+-Actualiza el Prisma Client automáticamente.
+
+📦 npx prisma studio
+Abre una interfaz visual para ver y editar los datos de la base desde el navegador
+-Lanza Prisma Studio: una app web local (corre en http://localhost:5555).
+-Ahí puedes ver tus tablas, editar registros, agregar nuevos, borrar, filtrar, etc.
+
+📦 npx prisma generate
+Cada que se cambie el schema.prisma (cambio en modelos, columnas, relaciones)
+
+NOTA: Prisma establece y gestiona los tipos según los modelos
+*/
+model Category {
+  id        Int         @id   @default(autoincrement()) 
+  name      String
+  slug      String
+
+  products  Product[]
+}
+
+model Product {
+  id          Int       @id   @default(autoincrement()) 
+  name        String
+  price       Float
+  image       String
+
+  categoryId  Int
+  category    Category  @relation(fields: [categoryId], references: [id])
+
+  orderProducts   OrderProducts[]
+}
+
+model Order {
+  id              Int         @id @default(autoincrement())
+  name            String 
+  total           Float
+  date            DateTime    @default(now())
+  status          Boolean     @default(false)
+  orderReadyAt    DateTime?
+
+  orderProducts   OrderProducts[]
+}
+
+model OrderProducts {
+  id            Int @id @default(autoincrement())
+
+  orderId       Int
+  order         Order @relation(fields: [orderId], references: [id])
+
+  productId     Int
+  product       Product @relation(fields: [productId], references: [id])
+
+  quantity      Int
+}
