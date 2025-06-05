@@ -23,6 +23,8 @@ que debe ser un Server Component).
 Aquí, como CreateProductPage es Server Component, él compone AddProductForm con ProductForm 
 desde el server antes de enviar al cliente, por lo que se respetan las reglas ✅.
 */
+export const dynamic = 'force-dynamic';
+
 function CreateProductPage() {
     //---VIEW---//
     return (
