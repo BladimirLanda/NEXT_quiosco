@@ -53,6 +53,8 @@ el modelo order con orderProducts).
 -Incluye el array orderProducts (la relación que tenga 
 el modelo order con orderProducts).
 */
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   //CONSULTA DB
   const orders = await prisma.order.findMany({

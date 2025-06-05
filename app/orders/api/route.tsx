@@ -1,5 +1,7 @@
 //API SWR
-import { prisma } from "@/src/lib/prisma";
+import { prisma } from "@/src/lib/prisma"
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     //CONSULTA DB
